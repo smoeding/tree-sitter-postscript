@@ -1,0 +1,35 @@
+{
+  "grammars": [
+    {
+      "name": "postscript",
+      "camelcase": "PostScript",
+      "scope": "source.postscript",
+      "file-types": [
+        "ps"
+      ],
+      "injection-regex": "^postscript$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "BSD-2-Clause",
+    "description": "PostScript grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Stefan Möding",
+        "email": "stm@kill-9.net"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/smoeding/tree-sitter-postscript"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}
