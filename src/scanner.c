@@ -176,6 +176,9 @@ static bool hexadecimal_string(TSLexer *lexer) {
  */
 
 static bool base85_string(TSLexer *lexer) {
+
+  skip_whitespace(lexer);
+
   for(bool has_content=false;; has_content=true) {
     // We are done if the end of file is reached
     if (lexer->eof(lexer)) return false;
