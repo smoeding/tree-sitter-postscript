@@ -29,11 +29,6 @@
  */
 
 
-const PREC = {
-  REALNUM: 3,
-  INTEGER: 5,
-};
-
 module.exports = grammar({
   name: "postscript",
 
@@ -49,7 +44,7 @@ module.exports = grammar({
     $.literal_string,
     $.hexadecimal_string,
     $.base85_string,
-    $.radix_number,
+    $.numeric,
   ],
 
   rules: {
@@ -60,9 +55,7 @@ module.exports = grammar({
 
     _element: $ => choice(
       $.string,
-      $.integer,
-      $.real_number,
-      $.radix_number,
+      $.numeric,
       $.array,
       $.procedure,
       $.dictionary,
@@ -87,14 +80,6 @@ module.exports = grammar({
       /\\[0-9]{1,3}/,
       /\\[^0-9]/,
     ),
-
-    real_number: _ => token(prec(PREC.REALNUM,
-      /[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)([eE][+-]?[0-9]+)?/
-    )),
-
-    integer: _ => token(prec(PREC.INTEGER,
-      /[+-]?[0-9]+/
-    )),
 
     comment: _ => /%.*/,
   },

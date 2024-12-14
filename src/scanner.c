@@ -48,9 +48,7 @@ enum TokenType {
   LITERAL_STRING,
   HEXADECIMAL_STRING,
   BASE85_STRING,
-  RADIX_NUMBER,
-  LITERAL,
-  OPERATOR,
+  NUMERIC,
 };
 
 
@@ -74,6 +72,10 @@ static void skip_whitespace(TSLexer *lexer) {
   }
 }
 
+static bool isdelimiter(char ch) {
+  return (isspace(ch) ||
+          (ch == U'/') || (ch == U'{') || (ch == U'[') || (ch == U'('));
+}
 
 /**
  * Scan a structure comment.
@@ -195,40 +197,76 @@ static bool base85_string(TSLexer *lexer) {
  * Scan for a radix number.
  */
 
-static bool radix_number(TSLexer *lexer) {
+static bool numeric(TSLexer *lexer) {
+  bool has_sign = false;
+  bool valid_number = true;
   bool valid_radix = false;
+  bool valid_exponent = false;
   int base = 0;
 
-  typedef enum ScanRadixState {
-    BASE,
-    NUMBER,
-  } ScanRadixState;
+  typedef enum NumericState {
+    SIGN,
+    INTEGER,
+    RADIX,
+    REAL,
+    MAGNITUDE,
+    EXPONENT,
+  } NumericState;
 
   skip_whitespace(lexer);
 
   // We are done if the end of file is reached
   if (lexer->eof(lexer)) return false;
 
-  for(ScanRadixState state=BASE;;) {
+  for(NumericState state=SIGN;;) {
     switch (state) {
-    case BASE:
-      if (base > 36) {
-        return false;
+    case SIGN:
+      if ((lexer->lookahead == U'+') || (lexer->lookahead == U'-')) {
+        lexer->advance(lexer, false);
+        has_sign = true;
       }
       else if (isdigit(lexer->lookahead)) {
-        base = (10 * base) + (lexer->lookahead - U'0');
-        lexer->advance(lexer, false);
+        state = INTEGER;
       }
-      else if ((lexer->lookahead == U'#') && (base >= 2)) {
+      else if (lexer->lookahead == U'.') {
         lexer->advance(lexer, false);
-        state = NUMBER;
+        state = REAL;
       }
       else {
         return false;
       }
       break;
 
-    case NUMBER:
+    case INTEGER:
+      if ((lexer->eof(lexer)) || (isdelimiter(lexer->lookahead))) {
+        return valid_number;
+      }
+      else if (isdigit(lexer->lookahead)) {
+        if (base <= 36) {
+          base *= 10;
+          base += (lexer->lookahead - U'0');
+        }
+
+        lexer->advance(lexer, false);
+        valid_number = true;
+      }
+      else if (lexer->lookahead == U'#') {
+        lexer->advance(lexer, false);
+        state = RADIX;
+      }
+      else if (lexer->lookahead == U'.') {
+        lexer->advance(lexer, false);
+        state = REAL;
+      }
+      else if ((lexer->lookahead == U'e') || (lexer->lookahead == U'E')) {
+        lexer->advance(lexer, false);
+        state = MAGNITUDE;
+      }
+      break;
+
+    case RADIX:
+      if ((base < 2) || (base > 36) || has_sign) return false;
+
       if ((!lexer->eof(lexer)) && (isdigit(lexer->lookahead))) {
         // Check if the character value is valid wrt the base
         int value = lexer->lookahead - U'0';
@@ -248,6 +286,41 @@ static bool radix_number(TSLexer *lexer) {
       else {
         return valid_radix;
       }
+      break;
+
+    case REAL:
+      if ((lexer->eof(lexer)) || (isdelimiter(lexer->lookahead))) {
+        return valid_number;
+      }
+      if ((!lexer->eof(lexer)) && (isdigit(lexer->lookahead))) {
+        lexer->advance(lexer, false);
+        valid_number = true;
+      }
+      else if ((lexer->lookahead == U'e') || (lexer->lookahead == U'E')) {
+        lexer->advance(lexer, false);
+        state = MAGNITUDE;
+      }
+      break;
+
+    case MAGNITUDE:
+      if ((lexer->lookahead == U'+') || (lexer->lookahead == U'-')) {
+        lexer->advance(lexer, false);
+      }
+      state = EXPONENT;
+      break;
+
+    case EXPONENT:
+      if ((lexer->eof(lexer)) || (isdelimiter(lexer->lookahead))) {
+        return valid_exponent;
+      }
+      else if (isdigit(lexer->lookahead)) {
+        lexer->advance(lexer, false);
+        valid_exponent = true;
+      }
+      else {
+        return false;
+      }
+      break;
     }
   }
 }
@@ -339,9 +412,9 @@ bool tree_sitter_postscript_external_scanner_scan(void *payload, TSLexer *lexer,
     }
   }
 
-  if (valid_symbols[RADIX_NUMBER]) {
-    if (radix_number(lexer)) {
-      lexer->result_symbol = RADIX_NUMBER;
+  if (valid_symbols[NUMERIC]) {
+    if (numeric(lexer)) {
+      lexer->result_symbol = NUMERIC;
       return true;
     }
   }

@@ -16,11 +16,11 @@
           "named": true
         },
         {
-          "type": "integer",
+          "type": "literal",
           "named": true
         },
         {
-          "type": "literal",
+          "type": "numeric",
           "named": true
         },
         {
@@ -29,14 +29,6 @@
         },
         {
           "type": "procedure",
-          "named": true
-        },
-        {
-          "type": "radix_number",
-          "named": true
-        },
-        {
-          "type": "real_number",
           "named": true
         },
         {
@@ -63,11 +55,11 @@
           "named": true
         },
         {
-          "type": "integer",
+          "type": "literal",
           "named": true
         },
         {
-          "type": "literal",
+          "type": "numeric",
           "named": true
         },
         {
@@ -76,14 +68,6 @@
         },
         {
           "type": "procedure",
-          "named": true
-        },
-        {
-          "type": "radix_number",
-          "named": true
-        },
-        {
-          "type": "real_number",
           "named": true
         },
         {
@@ -111,11 +95,11 @@
           "named": true
         },
         {
-          "type": "integer",
+          "type": "literal",
           "named": true
         },
         {
-          "type": "literal",
+          "type": "numeric",
           "named": true
         },
         {
@@ -124,14 +108,6 @@
         },
         {
           "type": "procedure",
-          "named": true
-        },
-        {
-          "type": "radix_number",
-          "named": true
-        },
-        {
-          "type": "real_number",
           "named": true
         },
         {
@@ -167,11 +143,11 @@
           "named": true
         },
         {
-          "type": "integer",
+          "type": "literal",
           "named": true
         },
         {
-          "type": "literal",
+          "type": "numeric",
           "named": true
         },
         {
@@ -180,14 +156,6 @@
         },
         {
           "type": "procedure",
-          "named": true
-        },
-        {
-          "type": "radix_number",
-          "named": true
-        },
-        {
-          "type": "real_number",
           "named": true
         },
         {
@@ -273,10 +241,6 @@
     "named": true
   },
   {
-    "type": "integer",
-    "named": true
-  },
-  {
     "type": "literal",
     "named": true
   },
@@ -285,15 +249,11 @@
     "named": true
   },
   {
+    "type": "numeric",
+    "named": true
+  },
+  {
     "type": "operator",
-    "named": true
-  },
-  {
-    "type": "radix_number",
-    "named": true
-  },
-  {
-    "type": "real_number",
     "named": true
   },
   {

@@ -1,0 +1,42 @@
+================================================================================
+comment at begin of line
+================================================================================
+%comment
+--------------------------------------------------------------------------------
+(document
+  (comment))
+
+================================================================================
+comment after operator
+================================================================================
+showpage %comment
+--------------------------------------------------------------------------------
+(document
+  (operator)
+  (comment))
+
+================================================================================
+structure comments
+================================================================================
+%!PS-Adobe-3.0
+%%Title: foo
+%%DocumentNeededResources: font Times-Roman Times-Italic
+%%+ font Courier
+%%BeginDefaults
+%%PageMedia: A4
+%%EndDefaults
+
+showpage
+
+%%EOF
+--------------------------------------------------------------------------------
+(document
+  (structure_comment)
+  (structure_comment)
+  (structure_comment)
+  (structure_comment)
+  (structure_comment)
+  (structure_comment)
+  (structure_comment)
+  (operator)
+  (structure_comment))
