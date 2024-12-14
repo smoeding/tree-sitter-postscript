@@ -73,8 +73,9 @@ static void skip_whitespace(TSLexer *lexer) {
 }
 
 static bool isdelimiter(char ch) {
-  return (isspace(ch) ||
-          (ch == U'/') || (ch == U'{') || (ch == U'[') || (ch == U'('));
+  return (isspace(ch) || (ch == U'/') ||
+          (ch == U'{') || (ch == U'[') || (ch == U'(') ||
+          (ch == U'}') || (ch == U']') || (ch == U')'));
 }
 
 /**
@@ -202,7 +203,7 @@ static bool numeric(TSLexer *lexer) {
   bool valid_number = true;
   bool valid_radix = false;
   bool valid_exponent = false;
-  int base = 0;
+  unsigned int base = 0;
 
   typedef enum NumericState {
     SIGN,
@@ -258,33 +259,37 @@ static bool numeric(TSLexer *lexer) {
         lexer->advance(lexer, false);
         state = REAL;
       }
-      else if ((lexer->lookahead == U'e') || (lexer->lookahead == U'E')) {
+      else if (tolower(lexer->lookahead) == U'e') {
         lexer->advance(lexer, false);
         state = MAGNITUDE;
+      }
+      else {
+        return false;
       }
       break;
 
     case RADIX:
       if ((base < 2) || (base > 36) || has_sign) return false;
 
-      if ((!lexer->eof(lexer)) && (isdigit(lexer->lookahead))) {
+      if ((lexer->eof(lexer)) || (isdelimiter(lexer->lookahead))) {
+        return valid_radix;
+      }
+      else if (isdigit(lexer->lookahead)) {
         // Check if the character value is valid wrt the base
-        int value = lexer->lookahead - U'0';
-        if (value > base) return false;
+        if ((lexer->lookahead - U'0') > base) return false;
 
         lexer->advance(lexer, false);
         valid_radix = true;
       }
-      else if ((!lexer->eof(lexer)) && (isalpha(lexer->lookahead))) {
+      else if (isalpha(lexer->lookahead)) {
         // Check if the character value is valid wrt the base
-        int value = tolower(lexer->lookahead) - U'a' + 10;
-        if (value > base) return false;
+        if ((tolower(lexer->lookahead) - U'a' + 10) > base) return false;
 
         lexer->advance(lexer, false);
         valid_radix = true;
       }
       else {
-        return valid_radix;
+        return false;
       }
       break;
 
@@ -292,13 +297,16 @@ static bool numeric(TSLexer *lexer) {
       if ((lexer->eof(lexer)) || (isdelimiter(lexer->lookahead))) {
         return valid_number;
       }
-      if ((!lexer->eof(lexer)) && (isdigit(lexer->lookahead))) {
+      else if (isdigit(lexer->lookahead)) {
         lexer->advance(lexer, false);
         valid_number = true;
       }
-      else if ((lexer->lookahead == U'e') || (lexer->lookahead == U'E')) {
+      else if (tolower(lexer->lookahead) == U'e') {
         lexer->advance(lexer, false);
         state = MAGNITUDE;
+      }
+      else {
+        return false;
       }
       break;
 
@@ -311,7 +319,7 @@ static bool numeric(TSLexer *lexer) {
 
     case EXPONENT:
       if ((lexer->eof(lexer)) || (isdelimiter(lexer->lookahead))) {
-        return valid_exponent;
+        return valid_number && valid_exponent;
       }
       else if (isdigit(lexer->lookahead)) {
         lexer->advance(lexer, false);
