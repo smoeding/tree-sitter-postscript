@@ -44,7 +44,7 @@
  */
 
 enum TokenType {
-  STRUCTURE_COMMENT,
+  DOCUMENT_STRUCTURE_COMMENT,
   LITERAL_STRING,
   HEXADECIMAL_STRING,
   BASE85_STRING,
@@ -81,7 +81,7 @@ static bool isdelimiter(char ch) {
  * Scan a structure comment.
  */
 
-static bool structure_comment(TSLexer *lexer) {
+static bool document_structure_comment(TSLexer *lexer) {
   bool found_comment = false;
 
   skip_whitespace(lexer);
@@ -384,9 +384,9 @@ void tree_sitter_postscript_external_scanner_deserialize(void *payload, const ch
 bool tree_sitter_postscript_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
   ScannerState *state = (ScannerState*)payload;
 
-  if (valid_symbols[STRUCTURE_COMMENT]) {
-    if (structure_comment(lexer)) {
-      lexer->result_symbol = STRUCTURE_COMMENT;
+  if (valid_symbols[DOCUMENT_STRUCTURE_COMMENT]) {
+    if (document_structure_comment(lexer)) {
+      lexer->result_symbol = DOCUMENT_STRUCTURE_COMMENT;
       return true;
     }
   }

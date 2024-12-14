@@ -95,6 +95,10 @@
           "named": true
         },
         {
+          "type": "document_structure_comment",
+          "named": true
+        },
+        {
           "type": "literal",
           "named": true
         },
@@ -112,10 +116,6 @@
         },
         {
           "type": "string",
-          "named": true
-        },
-        {
-          "type": "structure_comment",
           "named": true
         }
       ]
@@ -237,6 +237,10 @@
     "named": true
   },
   {
+    "type": "document_structure_comment",
+    "named": true
+  },
+  {
     "type": "hexadecimal_string",
     "named": true
   },
@@ -254,10 +258,6 @@
   },
   {
     "type": "operator",
-    "named": true
-  },
-  {
-    "type": "structure_comment",
     "named": true
   },
   {

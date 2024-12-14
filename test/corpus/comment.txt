@@ -26,17 +26,20 @@ structure comments
 %%PageMedia: A4
 %%EndDefaults
 
-showpage
+%end of page
+showpage % hit it
 
 %%EOF
 --------------------------------------------------------------------------------
 (document
-  (structure_comment)
-  (structure_comment)
-  (structure_comment)
-  (structure_comment)
-  (structure_comment)
-  (structure_comment)
-  (structure_comment)
+  (document_structure_comment)
+  (document_structure_comment)
+  (document_structure_comment)
+  (document_structure_comment)
+  (document_structure_comment)
+  (document_structure_comment)
+  (document_structure_comment)
+  (comment)
   (operator)
-  (structure_comment))
+  (comment)
+  (document_structure_comment))

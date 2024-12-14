@@ -9,7 +9,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "structure_comment"
+            "name": "document_structure_comment"
           },
           {
             "type": "SYMBOL",
@@ -234,7 +234,7 @@
   "externals": [
     {
       "type": "SYMBOL",
-      "name": "structure_comment"
+      "name": "document_structure_comment"
     },
     {
       "type": "SYMBOL",

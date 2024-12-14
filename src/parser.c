@@ -33,7 +33,7 @@ enum ts_symbol_identifiers {
   aux_sym_escape_sequence_token1 = 15,
   aux_sym_escape_sequence_token2 = 16,
   sym_comment = 17,
-  sym_structure_comment = 18,
+  sym_document_structure_comment = 18,
   sym_literal_string = 19,
   sym_hexadecimal_string = 20,
   sym_base85_string = 21,
@@ -71,7 +71,7 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_escape_sequence_token1] = "escape_sequence_token1",
   [aux_sym_escape_sequence_token2] = "escape_sequence_token2",
   [sym_comment] = "comment",
-  [sym_structure_comment] = "structure_comment",
+  [sym_document_structure_comment] = "document_structure_comment",
   [sym_literal_string] = "literal_string",
   [sym_hexadecimal_string] = "hexadecimal_string",
   [sym_base85_string] = "base85_string",
@@ -109,7 +109,7 @@ static const TSSymbol ts_symbol_map[] = {
   [aux_sym_escape_sequence_token1] = aux_sym_escape_sequence_token1,
   [aux_sym_escape_sequence_token2] = aux_sym_escape_sequence_token2,
   [sym_comment] = sym_comment,
-  [sym_structure_comment] = sym_structure_comment,
+  [sym_document_structure_comment] = sym_document_structure_comment,
   [sym_literal_string] = sym_literal_string,
   [sym_hexadecimal_string] = sym_hexadecimal_string,
   [sym_base85_string] = sym_base85_string,
@@ -201,7 +201,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym_structure_comment] = {
+  [sym_document_structure_comment] = {
     .visible = true,
     .named = true,
   },
@@ -545,7 +545,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_escape_sequence_token1] = ACTIONS(1),
     [aux_sym_escape_sequence_token2] = ACTIONS(1),
     [sym_comment] = ACTIONS(3),
-    [sym_structure_comment] = ACTIONS(1),
+    [sym_document_structure_comment] = ACTIONS(1),
     [sym_literal_string] = ACTIONS(1),
     [sym_hexadecimal_string] = ACTIONS(1),
     [sym_base85_string] = ACTIONS(1),
@@ -569,7 +569,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_LT] = ACTIONS(17),
     [anon_sym_LT_TILDE] = ACTIONS(19),
     [sym_comment] = ACTIONS(3),
-    [sym_structure_comment] = ACTIONS(13),
+    [sym_document_structure_comment] = ACTIONS(13),
     [sym_numeric] = ACTIONS(13),
   },
   [2] = {
@@ -610,7 +610,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_LT] = ACTIONS(61),
     [anon_sym_LT_TILDE] = ACTIONS(64),
     [sym_comment] = ACTIONS(3),
-    [sym_structure_comment] = ACTIONS(55),
+    [sym_document_structure_comment] = ACTIONS(55),
     [sym_numeric] = ACTIONS(55),
   },
   [4] = {
@@ -630,7 +630,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_LT] = ACTIONS(17),
     [anon_sym_LT_TILDE] = ACTIONS(19),
     [sym_comment] = ACTIONS(3),
-    [sym_structure_comment] = ACTIONS(69),
+    [sym_document_structure_comment] = ACTIONS(69),
     [sym_numeric] = ACTIONS(69),
   },
 };
@@ -1114,7 +1114,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(127), 1,
       anon_sym_LT,
     ACTIONS(125), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1130,7 +1130,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(135), 1,
       anon_sym_LT,
     ACTIONS(133), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1146,7 +1146,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(139), 1,
       anon_sym_LT,
     ACTIONS(137), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1162,7 +1162,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(151), 1,
       anon_sym_LT,
     ACTIONS(149), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1178,7 +1178,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(143), 1,
       anon_sym_LT,
     ACTIONS(141), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1194,7 +1194,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(131), 1,
       anon_sym_LT,
     ACTIONS(129), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1210,7 +1210,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(147), 1,
       anon_sym_LT,
     ACTIONS(145), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1226,7 +1226,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(123), 1,
       anon_sym_LT,
     ACTIONS(121), 10,
-      sym_structure_comment,
+      sym_document_structure_comment,
       sym_numeric,
       ts_builtin_sym_end,
       anon_sym_LBRACK,
@@ -1551,7 +1551,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
 };
 
 enum ts_external_scanner_symbol_identifiers {
-  ts_external_token_structure_comment = 0,
+  ts_external_token_document_structure_comment = 0,
   ts_external_token_literal_string = 1,
   ts_external_token_hexadecimal_string = 2,
   ts_external_token_base85_string = 3,
@@ -1559,7 +1559,7 @@ enum ts_external_scanner_symbol_identifiers {
 };
 
 static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
-  [ts_external_token_structure_comment] = sym_structure_comment,
+  [ts_external_token_document_structure_comment] = sym_document_structure_comment,
   [ts_external_token_literal_string] = sym_literal_string,
   [ts_external_token_hexadecimal_string] = sym_hexadecimal_string,
   [ts_external_token_base85_string] = sym_base85_string,
@@ -1568,14 +1568,14 @@ static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
 
 static const bool ts_external_scanner_states[7][EXTERNAL_TOKEN_COUNT] = {
   [1] = {
-    [ts_external_token_structure_comment] = true,
+    [ts_external_token_document_structure_comment] = true,
     [ts_external_token_literal_string] = true,
     [ts_external_token_hexadecimal_string] = true,
     [ts_external_token_base85_string] = true,
     [ts_external_token_numeric] = true,
   },
   [2] = {
-    [ts_external_token_structure_comment] = true,
+    [ts_external_token_document_structure_comment] = true,
     [ts_external_token_numeric] = true,
   },
   [3] = {

@@ -40,7 +40,7 @@ module.exports = grammar({
   ],
 
   externals: $ => [
-    $.structure_comment,
+    $.document_structure_comment,
     $.literal_string,
     $.hexadecimal_string,
     $.base85_string,
@@ -49,7 +49,7 @@ module.exports = grammar({
 
   rules: {
     document: $ => repeat(choice(
-      $.structure_comment,
+      $.document_structure_comment,
       $._element,
     )),
 
