@@ -5,5 +5,4 @@
 
 Adobe PostScript is a device-independent page description language and programming language. This project uses the [Tree-sitter](https://tree-sitter.github.io/) framework to implement a parser for the language.
 
-
 PostScript is a trademark by Adobe Inc.
