@@ -63,7 +63,7 @@ typedef struct ScannerState {
 
 
 /**
- * Helper functions.
+ * Skip over all following whitespace characters.
  */
 
 static void skip_whitespace(TSLexer *lexer) {
@@ -332,7 +332,7 @@ static bool numeric(TSLexer *lexer) {
         lexer->advance(lexer, false);
       }
       state = EXPONENT;
-      break;
+      // fall thru
 
     case EXPONENT:
       if ((lexer->eof(lexer)) || (isdelimiter(lexer->lookahead))) {
