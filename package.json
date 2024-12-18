@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-postscript",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "PostScript grammar for tree-sitter",
   "repository": "https://github.com/smoeding/tree-sitter-postscript",
   "license": "BSD-2-Clause",

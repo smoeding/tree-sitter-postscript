@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-postscript"
 description = "PostScript grammar for tree-sitter"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Stefan Möding <stm@kill-9.net>"]
 license = "BSD-2-Clause"
 readme = "README.md"
