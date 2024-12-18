@@ -100,7 +100,7 @@ static bool isdelimiter(char ch) {
  */
 
 static bool document_structure_comment(TSLexer *lexer) {
-  bool found_comment = false;
+  bool found_dsc = false;
 
   skip_whitespace(lexer);
 
@@ -111,21 +111,14 @@ static bool document_structure_comment(TSLexer *lexer) {
   if ((lexer->lookahead == U'%') && (lexer->get_column(lexer) == 0)) {
     lexer->advance(lexer, false);
 
-    switch (lexer->lookahead) {
-    case U'!':
-      found_comment = true;
-      break;
-
-    case U'%':
+    if (lexer->lookahead == U'!') {
       lexer->advance(lexer, false);
-
-      found_comment = (lexer->lookahead == U'+') ||
-                      (isalpha(lexer->lookahead) && isupper(lexer->lookahead));
-      break;
-
-    default:
-      // found_comment = false;
-      break;
+      found_dsc = true;
+    }
+    else if (lexer->lookahead == U'%') {
+      lexer->advance(lexer, false);
+      found_dsc = (lexer->lookahead == U'+') ||
+                  (isalpha(lexer->lookahead) && isupper(lexer->lookahead));
     }
 
     // Skip until the end of the line is reached.
@@ -135,7 +128,7 @@ static bool document_structure_comment(TSLexer *lexer) {
     }
   }
 
-  return found_comment;
+  return found_dsc;
 }
 
 
