@@ -72,10 +72,27 @@ static void skip_whitespace(TSLexer *lexer) {
   }
 }
 
+
+/**
+ * Test for a delimiting character.
+ */
+
 static bool isdelimiter(char ch) {
-  return (isspace(ch) || (ch == U'/') ||
-          (ch == U'{') || (ch == U'[') || (ch == U'(') ||
-          (ch == U'}') || (ch == U']') || (ch == U')'));
+  switch (ch) {
+  case U'%':
+  case U'/':
+  case U'(':
+  case U')':
+  case U'[':
+  case U']':
+  case U'{':
+  case U'}':
+  case U'<':
+  case U'>':
+    return true;
+  default:
+    return isspace(ch);
+  }
 }
 
 /**
