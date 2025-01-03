@@ -78,7 +78,7 @@ base85 string
   :;<=>?@
   ABCDEFGHIJKLMNOPQRSTUVWXYZ
   [\]^_`
-  abcdefghijklmnopqrstu
+  abcdefghijklmnopqrstuz
 ~>
 --------------------------------------------------------------------------------
 (document
