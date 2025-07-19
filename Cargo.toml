@@ -6,13 +6,20 @@ authors = ["Stefan Möding <stm@kill-9.net>"]
 license = "BSD-2-Clause"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "postscript"]
-categories = ["parsing", "text-editors"]
+categories = ["parser-implementations", "parsing", "text-editors"]
 repository = "https://github.com/smoeding/tree-sitter-postscript"
 edition = "2021"
 autoexamples = false
 
 build = "bindings/rust/build.rs"
-include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*", "tree-sitter.json"]
+include = [
+  "bindings/rust/*",
+  "grammar.js",
+  "queries/*",
+  "src/*",
+  "tree-sitter.json",
+  "LICENSE",
+]
 
 [lib]
 path = "bindings/rust/lib.rs"
@@ -21,7 +28,7 @@ path = "bindings/rust/lib.rs"
 tree-sitter-language = "0.1"
 
 [build-dependencies]
-cc = "1.1"
+cc = "1.2"
 
 [dev-dependencies]
-tree-sitter = "0.25"
+tree-sitter = "0.25.8"

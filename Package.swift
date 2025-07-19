@@ -1,23 +1,27 @@
 // swift-tools-version:5.3
+
+import Foundation
 import PackageDescription
 
+var sources = ["src/parser.c"]
+if FileManager.default.fileExists(atPath: "src/scanner.c") {
+    sources.append("src/scanner.c")
+}
+
 let package = Package(
-    name: "TreeSitterPostScript",
+    name: "TreeSitterPostscript",
     products: [
-        .library(name: "TreeSitterPostScript", targets: ["TreeSitterPostScript"]),
+        .library(name: "TreeSitterPostscript", targets: ["TreeSitterPostscript"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/tree-sitter/swift-tree-sitter", from: "0.8.0"),
+        .package(name: "SwiftTreeSitter", url: "https://github.com/tree-sitter/swift-tree-sitter", from: "0.9.0"),
     ],
     targets: [
         .target(
-            name: "TreeSitterPostScript",
+            name: "TreeSitterPostscript",
             dependencies: [],
             path: ".",
-            sources: [
-                "src/parser.c",
-                "src/scanner.c",
-            ],
+            sources: sources,
             resources: [
                 .copy("queries")
             ],
@@ -25,12 +29,12 @@ let package = Package(
             cSettings: [.headerSearchPath("src")]
         ),
         .testTarget(
-            name: "TreeSitterPostScriptTests",
+            name: "TreeSitterPostscriptTests",
             dependencies: [
                 "SwiftTreeSitter",
-                "TreeSitterPostScript",
+                "TreeSitterPostscript",
             ],
-            path: "bindings/swift/TreeSitterPostScriptTests"
+            path: "bindings/swift/TreeSitterPostscriptTests"
         )
     ],
     cLanguageStandard: .c11
