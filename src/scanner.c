@@ -148,7 +148,7 @@ static bool literal_string(TSLexer *lexer, ScannerState *state) {
       return has_content;
       break;
 
-    case '(':
+    case U'(':
       state->paren_level++;  // balanced parenthesis are allowed in a string
       break;
 
