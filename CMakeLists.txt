@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-postscript
-        VERSION "1.0.0"
+        VERSION "1.3.0"
         DESCRIPTION "PostScript grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/smoeding/tree-sitter-postscript"
         LANGUAGES C)

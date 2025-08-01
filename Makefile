@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-postscript
 HOMEPAGE_URL := https://github.com/smoeding/tree-sitter-postscript
-VERSION := 1.0.0
+VERSION := 1.3.0
 
 # repository
 SRC_DIR := src
