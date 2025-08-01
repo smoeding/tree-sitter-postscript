@@ -118,6 +118,7 @@ static bool document_structure_comment(TSLexer *lexer) {
     else if (lexer->lookahead == U'%') {
       lexer->advance(lexer, false);
       found_dsc = (lexer->lookahead == U'+') ||
+                  (lexer->lookahead == U'?') ||
                   (isalpha(lexer->lookahead) && isupper(lexer->lookahead));
     }
 

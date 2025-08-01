@@ -59,3 +59,20 @@ showpage % hit it
   (operator)
   (comment)
   (document_structure_comment))
+
+================================================================================
+document structure comments with query
+================================================================================
+%!PS-Adobe-3.0 Query
+%%?BeginVMStatus
+vmstatus
+%%?EndVMStatus: Unknown
+%%EOF
+
+--------------------------------------------------------------------------------
+(document
+  (document_structure_comment)
+  (document_structure_comment)
+  (operator)
+  (document_structure_comment)
+  (document_structure_comment))
